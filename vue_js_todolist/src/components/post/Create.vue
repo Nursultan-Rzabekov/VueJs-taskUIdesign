@@ -29,17 +29,17 @@
 </template>
 
 <script>
-import axios from "axios";
-import { server } from "../../utils/helper";
+import store from "../../../storage/index";
 import router from "../../router";
+
 export default {
   data() {
     return {
       title: "",
       description: "",
       body: "",
-      author: "Olususi Oluyemi",
-      date_posted: ""
+      author: "Nursultan Rzabekov",
+      date_posted: "",
     };
   },
   created() {
@@ -52,16 +52,20 @@ export default {
         description: this.description,
         body: this.body,
         author: this.author,
-        date_posted: this.date_posted
+        date_posted: this.date_posted,
+        done:false
       };
-      this.__submitToServer(postData);
-    },
-    __submitToServer(data) {
-      axios.post(`${server.baseURL}/blog/post`, data).then(data => {
-        console.log(data);
-        router.push({ name: "home" });
-      });
+      store.dispatch('search',postData); 
+      router.push({ name: "home" });
+    //   });
+      //this.__submitToServer(postData);
     }
+    // __submitToServer(data) {
+    //   axios.post(`${server.baseURL}/blog/post`, data).then(data => {
+    //     console.log(data);
+    //     router.push({ name: "home" });
+    //   });
+    // }
   }
 };
 </script>

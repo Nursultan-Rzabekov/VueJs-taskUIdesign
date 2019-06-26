@@ -8,8 +8,8 @@ import PostComponent from '@/components/post/Post';
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  // mode: 'history',
+  // base: process.env.BASE_URL,
   routes: [
     { path: '/', redirect: { name: 'home' } },
     { path: '/home', name: 'home', component: HomeComponent },

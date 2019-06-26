@@ -34,9 +34,11 @@
 </template>
 
 <script>
-import { server } from "../../utils/helper";
-import axios from "axios";
+// import { server } from "../../utils/helper";
+// import axios from "axios";
 import router from "../../router";
+import store from "../../../storage/index";
+
 export default {
   data() {
     return {
@@ -44,31 +46,23 @@ export default {
       post: {}
     };
   },
-  created() {
-    this.id = this.$route.params.id;
-    this.getPost();
-  },
   methods: {
     editPost() {
-      let postData = {
+      var result = {
         title: this.post.title,
         description: this.post.description,
         body: this.post.body,
         author: this.post.author,
         date_posted: this.post.date_posted
-      };
+      }
+      var total = {
+        id:this.$route.params.id,
+        result:result
+      }
 
-      axios
-        .put(`${server.baseURL}/blog/edit?postID=${this.id}`, postData)
-        .then(data => {
-          router.push({ name: "home" });
-        });
-    },
-    getPost() {
-      axios
-        .get(`${server.baseURL}/blog/post/${this.id}`)
-        .then(data => (this.post = data.data));
-    },
+      store.dispatch('update',total);
+      router.push({ name: "home" });
+    },  
     navigate() {
       router.go(-1);
     }
