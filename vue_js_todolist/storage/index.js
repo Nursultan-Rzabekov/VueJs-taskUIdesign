@@ -7,10 +7,10 @@ const store = new Vuex.Store({
 		results: [
 			{
 				//'img':'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/batman-art-rohan-sendi.jpg',
-				'title':'Amantay',
+				'title':'Hello World',
 				'description':'Just do it',
 				'author': "Nursultan Rzabekov",
-				'body':'Amantay is the best',
+				'body':'Just do it',
 				'done':false
 			},
 			{
@@ -18,7 +18,7 @@ const store = new Vuex.Store({
 				'title':'Nurs',
 				'description':'Just do it',
 				'author': "Nursultan Rzabekov",
-				'body':'Nurs is the best',
+				'body':'Just do it',
 				'done':false
 			}
 		]

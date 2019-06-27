@@ -57,15 +57,7 @@ export default {
       };
       store.dispatch('search',postData); 
       router.push({ name: "home" });
-    //   });
-      //this.__submitToServer(postData);
     }
-    // __submitToServer(data) {
-    //   axios.post(`${server.baseURL}/blog/post`, data).then(data => {
-    //     console.log(data);
-    //     router.push({ name: "home" });
-    //   });
-    // }
   }
 };
 </script>

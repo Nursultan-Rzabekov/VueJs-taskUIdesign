@@ -10,19 +10,19 @@
           <form id="edit-post-form" @submit.prevent="editPost">
             <div class="form-group col-md-12">
                 <label for="title"> Title </label>
-                <input type="text" id="title" v-model="post.title" name="title" class="form-control" placeholder="Enter title">
+                <input type="text" id="title" v-model="title" name="title" class="form-control" placeholder="Enter title">
             </div>
             <div class="form-group col-md-12">
                 <label for="description"> Description </label>
-                <input type="text" id="description" v-model="post.description" name="description" class="form-control" placeholder="Enter Description">
+                <input type="text" id="description" v-model="description" name="description" class="form-control" placeholder="Enter Description">
             </div>
             <div class="form-group col-md-12">
                 <label for="body"> Write Content </label>
-                <textarea id="body" cols="30" rows="5" v-model="post.body" class="form-control"></textarea>
+                <textarea id="body" cols="30" rows="5" v-model="result.body" class="form-control"></textarea>
             </div>
             <div class="form-group col-md-12">
                 <label for="author"> Author </label>
-                <input type="text" id="author" v-model="post.author" name="author" class="form-control">
+                <input type="text" id="author" v-model="author" name="author" class="form-control">
             </div>
 
             <div class="form-group col-md-4 pull-right">
@@ -43,23 +43,41 @@ export default {
   data() {
     return {
       id: 0,
-      post: {}
+      post: {},
+      title:'',
+      body:'',
+      author: '',
+      description:'',
+      date_posted:'',
+
     };
+  },
+  computed:{
+    result(){
+      var id = this.$route.params.id,
+      result = store.getters.results[id];
+      this.title = result.title;
+      this.description = result.description;
+      this.author = result.author;
+      this.body = result.body;
+      this.date_posted = result.date_posted;
+      return result;
+    }
   },
   methods: {
     editPost() {
       var result = {
-        title: this.post.title,
-        description: this.post.description,
-        body: this.post.body,
-        author: this.post.author,
-        date_posted: this.post.date_posted
+        title: this.title,
+        description: this.description,
+        body: this.body,
+        author: this.author,
+        date_posted: this.date_posted,
+        done:false
       }
       var total = {
         id:this.$route.params.id,
         result:result
       }
-
       store.dispatch('update',total);
       router.push({ name: "home" });
     },  

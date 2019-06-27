@@ -9,18 +9,17 @@
             <h2> No post found at the moment </h2>
         </div>
       </div>
-       
         <div class="row"   >
-           <div class="col-md-6"  v-for="post in results" :key="post._id" >
+           <div class="col-md-6"  v-for="(post,index) in results">
               <div class="card mb-4 shadow-sm">
                 <div class="box card-body" :class="{done: post.done}" >
                    <h2 class="card-img-top">{{ post.title }}</h2>
                   <p class="card-text">{{ post.body }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group" style="margin-bottom: 20px;">
-                      <router-link :to="{name: 'Post', params: {id: post._id}}" class="btn btn-sm btn-outline-secondary">View Post </router-link>
-                       <router-link :to="{name: 'Edit', params: {id: post._id}}" class="btn btn-sm btn-outline-secondary">Edit Post </router-link>
-                       <button class="btn btn-sm btn-outline-secondary" v-on:click="deletePost(post._id)">Delete Post</button>
+                      <router-link :to="{name: 'Post', params: {id: index}}" class="btn btn-sm btn-outline-secondary">View Post </router-link>
+                       <router-link :to="{name: 'Edit', params: {id: index}}" class="btn btn-sm btn-outline-secondary">Edit Post </router-link>
+                       <button class="btn btn-sm btn-outline-secondary" v-on:click="deletePost(index)">Delete Post</button>
                        <div class="box">
                         <button class="btn btn-sm btn-outline-secondary" @click='post.done = !post.done'>{{ (post.done) ? 'Unmark' : 'Done'  }}</button>
                         </div>
@@ -65,14 +64,14 @@ export default {
     //     .get(`${server.baseURL}/blog/posts`)
     //     .then(data => (this.posts = data.data));
     // },
-    // deletePost(id) {
-    //   // axios.delete(`${server.baseURL}/blog/delete?postID=${id}`).then(data => {
-    //   //   console.log(data);
-    //   //   
-    //   // });
-    //   store.dispatch('delete',this.$route.id); 
-    //   window.location.reload();
-    // }
+    deletePost(id) {
+      // axios.delete(`${server.baseURL}/blog/delete?postID=${id}`).then(data => {
+      //   console.log(data);
+      //   
+      // });
+      store.dispatch('delete',id); 
+      window.location.reload();
+    }
   }
 };
 </script>
